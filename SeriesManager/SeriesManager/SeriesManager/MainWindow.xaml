@@ -16,6 +16,23 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="217,16,0,0" VerticalAlignment="Top" Width="75" Click="Edit_Click" Visibility="Hidden"/>
+        <StackPanel HorizontalAlignment="Left" Height="203" Margin="325,148,0,0" VerticalAlignment="Top" Width="389" Name="EditPanel" Visibility="Hidden">
+            <Label x:Name="lblSeriesToEdit" Content="Name of the series to edit" HorizontalAlignment="Center" Margin="121,0,106,0" Width="162" Height="27"/>
+            <TextBox x:Name="txtSeriesToEdit" Height="23" TextWrapping="Wrap" Text=""/>
+            <Label x:Name="lblNameOfSeries" Content="Name" Margin="0,0,10,0" HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtNewName" Height="23" TextWrapping="Wrap" Text=""/>
+            <Label x:Name="lblSeason" Content="Current season" HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtSeason" Height="23" TextWrapping="Wrap" Text=""/>
+            <Button x:Name="btnApply" Content="Apply" Click="BtnApply_Click"/>
+        </StackPanel>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="117,16,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden" Click="BtnAdd_Click"/>
+        <StackPanel HorizontalAlignment="Left" Height="76" Margin="356,264,0,0" VerticalAlignment="Top" Width="428" Name="AddPanel" Background="LightBlue" Visibility="Hidden">
+            <Label x:Name="lblInfoSeriesToAdd" Content="Series to add"/>
+            <TextBox x:Name="txtSeriesToBeAdded" Height="22" TextWrapping="Wrap" Text="" Background="AntiqueWhite"/>
+            <Button x:Name="btnApplyAddition" Content="Apply" Click="BtnApplyAddition_Click"/>
+        </StackPanel>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="1920,526,-262,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

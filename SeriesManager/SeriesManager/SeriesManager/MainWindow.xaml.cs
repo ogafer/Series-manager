@@ -25,32 +25,76 @@ namespace SeriesManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region variables
+        List<string> data = new List<string>();
+        Features features = new Features();
+        #endregion
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.InitialDirectory = @"~\SeriesManager\SeriesManager";
-            var result = dialog.ShowDialog();
-
-            var item = File.ReadAllLines(dialog.FileName);
-            string[] aux = new string[100];
-            List<string> data = new List<string>();
-            foreach (var i in item)
+            dialog.InitialDirectory = @"~\\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\bin\Debug";
+            dialog.ShowDialog();
+            string fileName = dialog.FileName;
+            foreach(string series in features.LoadList(fileName))
             {
-                aux = i.Split(';');
-                for (int j = 0; j < aux.Length; j++)
+                lstSeries.Items.Add(series);
+                btnAdd.Visibility = Visibility.Visible;
+                btnEdit.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            this.EditPanel.Visibility = Visibility.Visible;
+        }
+
+        private void BtnApply_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                foreach (string i in lstSeries.Items)
                 {
-                    data.Add(aux[j]);
+                    if (i.Contains(txtSeriesToEdit.Text))
+                    {
+                        lstSeries.Items.Remove(i);
+                        lstSeries.Items.Add(txtNewName.Text);
+                    }
                 }
             }
-            for (int z = 0; z < data.Count; z++)
+            catch
             {
-                lstSeries.Items.Add(data[z].ToString());
+
             }
+            List<string> series = new List<string>();
+            foreach (string i in lstSeries.Items)
+            {
+                series.Add(i);
+            }
+            this.EditPanel.Visibility = Visibility.Hidden;
+            File.WriteAllLines("Series.csv", series);
+        }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddPanel.Visibility = Visibility.Visible;
+        }
+
+        private void BtnApplyAddition_Click(object sender, RoutedEventArgs e)
+        {
+            lstSeries.Items.Add(txtSeriesToBeAdded.Text);
+            List<string> series = new List<string>();
+            foreach (string i in lstSeries.Items)
+            {
+                series.Add(i);
+            }
+            this.AddPanel.Visibility = Visibility.Hidden;
+            File.WriteAllLines("Series.csv", series);
         }
     }
 }
