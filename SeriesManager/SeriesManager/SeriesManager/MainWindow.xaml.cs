@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;    
+using System.Windows.Shapes;
 using System.Drawing;
 using Microsoft.VisualBasic.FileIO;
 using System.IO;
@@ -32,23 +32,33 @@ namespace SeriesManager
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
 
+        #region Open and Load the file
         private void Update_Click(object sender, RoutedEventArgs e)
         {
+            lstSeries.Items.Clear();
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.InitialDirectory = @"~\\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\bin\Debug";
             dialog.ShowDialog();
             string fileName = dialog.FileName;
-            foreach(string series in features.LoadList(fileName))
+            foreach (string series in features.LoadList(fileName))
             {
                 lstSeries.Items.Add(series);
+
+            }
+            if (!lstSeries.Items.IsEmpty)
+            {
                 btnAdd.Visibility = Visibility.Visible;
                 btnEdit.Visibility = Visibility.Visible;
+                btnRemove.Visibility = Visibility.Visible;
             }
         }
 
+        #endregion
+
+        #region Edit Series
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             this.EditPanel.Visibility = Visibility.Visible;
@@ -56,14 +66,105 @@ namespace SeriesManager
 
         private void BtnApply_Click(object sender, RoutedEventArgs e)
         {
+            bool hasSeries = false;
             try
             {
+                foreach (string item in lstSeries.Items)
+                {
+                    if (item.Equals(txtNewName.Text))
+                    {
+                        MessageBox.Show("This Series already exists!");
+                        this.EditPanel.Visibility = Visibility.Hidden;
+                        hasSeries = true;
+                        break;
+                    }
+                }
+                if (!hasSeries)
+                {
+                    foreach (string item in lstSeries.Items)
+                    {
+                        if (item.Equals(txtSeriesToEdit.Text))
+                        {
+                            lstSeries.Items.Remove(item);
+                            lstSeries.Items.Add(txtNewName.Text);
+                        }
+                    }
+                    List<string> series = new List<string>();
+                    foreach (string i in lstSeries.Items)
+                    {
+                        series.Add(i);
+                    }
+                    this.EditPanel.Visibility = Visibility.Hidden;
+                    File.WriteAllLines("Series.csv", series);
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        #endregion
+
+        #region Add Series
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddPanel.Visibility = Visibility.Visible;
+        }
+
+        private void BtnApplyAddition_Click(object sender, RoutedEventArgs e)
+        {
+            bool hasSeries = false;
+            foreach (string item in lstSeries.Items)
+            {
+                if (item.Equals(txtSeriesToBeAdded.Text))
+                {
+                    MessageBox.Show("This Series already exists!");
+                    this.AddPanel.Visibility = Visibility.Hidden;
+                    hasSeries = true;
+                    break;
+                }
+            }
+            if (!hasSeries)
+            {
+                lstSeries.Items.Add(txtSeriesToBeAdded.Text);
+                List<string> series = new List<string>();
                 foreach (string i in lstSeries.Items)
                 {
-                    if (i.Contains(txtSeriesToEdit.Text))
+                    series.Add(i);
+                }
+                this.AddPanel.Visibility = Visibility.Hidden;
+                File.WriteAllLines("Series.csv", series);
+            }
+
+        }
+
+        #endregion
+
+        #region Cancel button
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            EditPanel.Visibility = Visibility.Hidden;
+            AddPanel.Visibility = Visibility.Hidden;
+            RemovePanel.Visibility = Visibility.Hidden;
+        }
+        #endregion
+
+        #region Remove Series
+        private void BtnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            RemovePanel.Visibility = Visibility.Visible;
+        }
+
+        private void BtnRemoveSeries_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                foreach (string seriesName in lstSeries.Items)
+                {
+                    if (seriesName == txtSeriesToBeRemoved.Text)
                     {
-                        lstSeries.Items.Remove(i);
-                        lstSeries.Items.Add(txtNewName.Text);
+                        lstSeries.Items.Remove(seriesName);
                     }
                 }
             }
@@ -76,25 +177,10 @@ namespace SeriesManager
             {
                 series.Add(i);
             }
-            this.EditPanel.Visibility = Visibility.Hidden;
+
+            RemovePanel.Visibility = Visibility.Hidden;
             File.WriteAllLines("Series.csv", series);
         }
-
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            AddPanel.Visibility = Visibility.Visible;
-        }
-
-        private void BtnApplyAddition_Click(object sender, RoutedEventArgs e)
-        {
-            lstSeries.Items.Add(txtSeriesToBeAdded.Text);
-            List<string> series = new List<string>();
-            foreach (string i in lstSeries.Items)
-            {
-                series.Add(i);
-            }
-            this.AddPanel.Visibility = Visibility.Hidden;
-            File.WriteAllLines("Series.csv", series);
-        }
+        #endregion
     }
 }
