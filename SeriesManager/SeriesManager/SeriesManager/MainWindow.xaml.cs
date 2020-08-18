@@ -74,7 +74,6 @@ namespace SeriesManager
                     if (item.Equals(txtNewName.Text))
                     {
                         MessageBox.Show("This Series already exists!");
-                        this.EditPanel.Visibility = Visibility.Hidden;
                         hasSeries = true;
                         break;
                     }
@@ -83,10 +82,10 @@ namespace SeriesManager
                 {
                     foreach (string item in lstSeries.Items)
                     {
-                        if (item.Equals(txtSeriesToEdit.Text))
+                        if (item.StartsWith(txtSeriesToEdit.Text))
                         {
                             lstSeries.Items.Remove(item);
-                            lstSeries.Items.Add(txtNewName.Text);
+                            lstSeries.Items.Add(txtNewName.Text + "-Season " + txtSeason.Text);
                         }
                     }
                     List<string> series = new List<string>();
@@ -97,10 +96,11 @@ namespace SeriesManager
                     this.EditPanel.Visibility = Visibility.Hidden;
                     File.WriteAllLines("Series.csv", series);
                 }
+                this.EditPanel.Visibility = Visibility.Hidden;
             }
             catch
             {
-
+                this.EditPanel.Visibility = Visibility.Hidden;
             }
         }
 
@@ -127,7 +127,7 @@ namespace SeriesManager
             }
             if (!hasSeries)
             {
-                lstSeries.Items.Add(txtSeriesToBeAdded.Text);
+                lstSeries.Items.Add(txtSeriesToBeAdded.Text + "-Season " + txtSeasonOfTheSeriesToAdd.Text);
                 List<string> series = new List<string>();
                 foreach (string i in lstSeries.Items)
                 {
@@ -162,7 +162,7 @@ namespace SeriesManager
             {
                 foreach (string seriesName in lstSeries.Items)
                 {
-                    if (seriesName == txtSeriesToBeRemoved.Text)
+                    if (seriesName.StartsWith(txtSeriesToBeRemoved.Text))
                     {
                         lstSeries.Items.Remove(seriesName);
                     }

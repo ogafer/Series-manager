@@ -27,4 +27,3 @@ C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager
 C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\obj\Debug\SeriesManager.csproj.CoreCompileInputs.cache
 C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\obj\Debug\SeriesManager.exe
 C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\obj\Debug\SeriesManager.pdb
-C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\obj\Debug\SeriesManager.csprojAssemblyReference.cache
