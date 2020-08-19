@@ -13,11 +13,11 @@ C:\Users\tiago\Desktop\SeriesManager\SeriesManager\SeriesManager\obj\Debug\Serie
 C:\Users\tiago\Desktop\SeriesManager\SeriesManager\SeriesManager\obj\Debug\SeriesManager.csproj.CoreCompileInputs.cache
 C:\Users\tiago\Desktop\SeriesManager\SeriesManager\SeriesManager\obj\Debug\SeriesManager.exe
 C:\Users\tiago\Desktop\SeriesManager\SeriesManager\SeriesManager\obj\Debug\SeriesManager.pdb
+C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\bin\Debug\SeriesManager.pdb
+C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\obj\Debug\App.g.cs
 C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\bin\Debug\SeriesManager.exe.config
 C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\bin\Debug\SeriesManager.exe
-C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\bin\Debug\SeriesManager.pdb
 C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\obj\Debug\MainWindow.g.cs
-C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\obj\Debug\App.g.cs
 C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\obj\Debug\SeriesManager_MarkupCompile.cache
 C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\obj\Debug\SeriesManager_MarkupCompile.lref
 C:\Users\tiago\Desktop\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\obj\Debug\MainWindow.baml

@@ -24,7 +24,14 @@
             <TextBox x:Name="txtNewName" Height="23" TextWrapping="Wrap" Text="" Background="AntiqueWhite"/>
             <Label x:Name="lblSeason" Content="Current season" HorizontalAlignment="Center"/>
             <TextBox x:Name="txtSeason" Height="23" TextWrapping="Wrap" Text="" Background="AntiqueWhite"/>
-            <Button x:Name="btnApply" Content="Apply" Click="BtnApply_Click"/>
+            <Button x:Name="btnApply" Click="BtnApply_Click">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Padding="2" Width="37" Content="Apply"/>
+                        <Image Source="Resources\apply.png" Width="40" Height="20"/>
+                    </StackPanel>
+                </StackPanel>
+            </Button>
             <Button x:Name="btnCancel" Content="Cancel" Click="BtnCancel_Click"/>
         </StackPanel>
         <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="117,16,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden" Click="BtnAdd_Click"/>
@@ -33,7 +40,14 @@
             <TextBox x:Name="txtSeriesToBeAdded" Height="22" TextWrapping="Wrap" Text="" Background="AntiqueWhite"/>
             <Label x:Name="label" Content="Season of the Series" HorizontalAlignment="Left" Width="438"/>
             <TextBox x:Name="txtSeasonOfTheSeriesToAdd" Height="23" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" Width="438" Background="AntiqueWhite"/>
-            <Button x:Name="btnApplyAddition" Content="Apply" Click="BtnApplyAddition_Click"/>
+            <Button x:Name="btnApplyAddition" Click="BtnApplyAddition_Click">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Padding="2" Width="37" Content="Apply"/>
+                        <Image Source="Resources\apply.png" Width="40" Height="20"/>
+                    </StackPanel>
+                </StackPanel>
+            </Button>
             <Button x:Name="btnCancelAdd" Content="Cancel" Click="BtnCancel_Click"/>
         </StackPanel>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="1920,526,-262,0" VerticalAlignment="Top" Width="75"/>

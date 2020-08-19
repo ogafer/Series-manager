@@ -40,7 +40,7 @@ namespace SeriesManager
         {
             lstSeries.Items.Clear();
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.InitialDirectory = @"~\\ManagerOfSeries\SeriesManager\SeriesManager\SeriesManager\bin\Debug";
+            dialog.InitialDirectory = @"~\\\SeriesManager\SeriesManager\bin\Debug";
             dialog.ShowDialog();
             string fileName = dialog.FileName;
             foreach (string series in features.LoadList(fileName))
@@ -66,41 +66,48 @@ namespace SeriesManager
 
         private void BtnApply_Click(object sender, RoutedEventArgs e)
         {
-            bool hasSeries = false;
-            try
+            if (!string.IsNullOrEmpty(txtNewName.Text) && !string.IsNullOrEmpty(txtSeason.Text))
             {
-                foreach (string item in lstSeries.Items)
-                {
-                    if (item.Equals(txtNewName.Text))
-                    {
-                        MessageBox.Show("This Series already exists!");
-                        hasSeries = true;
-                        break;
-                    }
-                }
-                if (!hasSeries)
+                bool hasSeries = false;
+                try
                 {
                     foreach (string item in lstSeries.Items)
                     {
-                        if (item.StartsWith(txtSeriesToEdit.Text))
+                        if (item.Equals(txtNewName.Text))
                         {
-                            lstSeries.Items.Remove(item);
-                            lstSeries.Items.Add(txtNewName.Text + "-Season " + txtSeason.Text);
+                            MessageBox.Show("This Series already exists!");
+                            hasSeries = true;
+                            break;
                         }
                     }
-                    List<string> series = new List<string>();
-                    foreach (string i in lstSeries.Items)
+                    if (!hasSeries)
                     {
-                        series.Add(i);
+                        foreach (string item in lstSeries.Items)
+                        {
+                            if (item.StartsWith(txtSeriesToEdit.Text))
+                            {
+                                lstSeries.Items.Remove(item);
+                                lstSeries.Items.Add(txtNewName.Text + "-Season " + txtSeason.Text);
+                            }
+                        }
+                        List<string> series = new List<string>();
+                        foreach (string i in lstSeries.Items)
+                        {
+                            series.Add(i);
+                        }
+                        this.EditPanel.Visibility = Visibility.Hidden;
+                        File.WriteAllLines("Series.csv", series);
                     }
                     this.EditPanel.Visibility = Visibility.Hidden;
-                    File.WriteAllLines("Series.csv", series);
                 }
-                this.EditPanel.Visibility = Visibility.Hidden;
+                catch
+                {
+                    this.EditPanel.Visibility = Visibility.Hidden;
+                }
             }
-            catch
+            else
             {
-                this.EditPanel.Visibility = Visibility.Hidden;
+                MessageBox.Show("Please fill every information!");
             }
         }
 
@@ -114,28 +121,33 @@ namespace SeriesManager
 
         private void BtnApplyAddition_Click(object sender, RoutedEventArgs e)
         {
-            bool hasSeries = false;
-            foreach (string item in lstSeries.Items)
+            if (!string.IsNullOrEmpty(txtSeriesToBeAdded.Text) && !string.IsNullOrEmpty(txtSeasonOfTheSeriesToAdd.Text))
             {
-                if (item.Equals(txtSeriesToBeAdded.Text))
+                bool hasSeries = false;
+                foreach (string item in lstSeries.Items)
                 {
-                    MessageBox.Show("This Series already exists!");
+                    if (item.Equals(txtSeriesToBeAdded.Text))
+                    {
+                        MessageBox.Show("This Series already exists!");
+                        this.AddPanel.Visibility = Visibility.Hidden;
+                        hasSeries = true;
+                        break;
+                    }
+                }
+                if (!hasSeries)
+                {
+                    lstSeries.Items.Add(txtSeriesToBeAdded.Text + "-Season " + txtSeasonOfTheSeriesToAdd.Text);
+                    List<string> series = new List<string>();
+                    foreach (string i in lstSeries.Items)
+                    {
+                        series.Add(i);
+                    }
                     this.AddPanel.Visibility = Visibility.Hidden;
-                    hasSeries = true;
-                    break;
+                    File.WriteAllLines("Series.csv", series);
                 }
             }
-            if (!hasSeries)
-            {
-                lstSeries.Items.Add(txtSeriesToBeAdded.Text + "-Season " + txtSeasonOfTheSeriesToAdd.Text);
-                List<string> series = new List<string>();
-                foreach (string i in lstSeries.Items)
-                {
-                    series.Add(i);
-                }
-                this.AddPanel.Visibility = Visibility.Hidden;
-                File.WriteAllLines("Series.csv", series);
-            }
+            else
+                MessageBox.Show("Please fill every information!");
 
         }
 
@@ -158,28 +170,31 @@ namespace SeriesManager
 
         private void BtnRemoveSeries_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (!string.IsNullOrEmpty(txtSeriesToBeRemoved.Text))
             {
-                foreach (string seriesName in lstSeries.Items)
+                try
                 {
-                    if (seriesName.StartsWith(txtSeriesToBeRemoved.Text))
+                    foreach (string seriesName in lstSeries.Items)
                     {
-                        lstSeries.Items.Remove(seriesName);
+                        if (seriesName.StartsWith(txtSeriesToBeRemoved.Text))
+                        {
+                            lstSeries.Items.Remove(seriesName);
+                        }
                     }
                 }
-            }
-            catch
-            {
+                catch
+                {
 
-            }
-            List<string> series = new List<string>();
-            foreach (string i in lstSeries.Items)
-            {
-                series.Add(i);
-            }
+                }
+                List<string> series = new List<string>();
+                foreach (string i in lstSeries.Items)
+                {
+                    series.Add(i);
+                }
 
-            RemovePanel.Visibility = Visibility.Hidden;
-            File.WriteAllLines("Series.csv", series);
+                RemovePanel.Visibility = Visibility.Hidden;
+                File.WriteAllLines("Series.csv", series);
+            }
         }
         #endregion
     }
